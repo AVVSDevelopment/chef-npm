@@ -1,9 +1,18 @@
 action :install do
-  cmd  = "npm -g install #{new_resource.name}"
-  cmd += "@#{new_resource.version}" if new_resource.version
+
+  pkgName =  new_resource.name
+  pkgName += "@#{new_resource.version}" if new_resource.version
+  only = "npm list -g #{new_resource.name} | grep #{pkgName}"
+  runUser = new_resource.user ? new_resource.user : "root"
+
   execute "install NPM package #{new_resource.name}" do
-    command cmd
+    command "npm install -g #{pkgName}"
+    if "grep #{user} /etc/passwd" 
+      user = runUser
+    end
+    not_if "#{only}"         
   end
+
 end
 
 action :install_local do

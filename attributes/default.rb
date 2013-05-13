@@ -19,4 +19,3 @@
 #
 
 default['npm']['version'] = '1.1.0-3'
-#default['npm'][''] = ''

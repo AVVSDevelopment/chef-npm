@@ -23,7 +23,9 @@ actions :install, :install_local, :uninstall, :uninstall_local
 
 attribute :name, :name_attribute => true
 attribute :version, :default => nil
-attribute :path, :default => nil
+attribute :path, :default  => nil
+attribute :user, :default  => nil
+attribute :group, :default => nil
 
 def initialize(*args)
   super
